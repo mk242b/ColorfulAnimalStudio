@@ -1,41 +1,41 @@
 import React from 'react';
+import { useLanguage } from '../contexts/LanguageContext';
 
 export const Footer: React.FC = () => {
+  const { t } = useLanguage();
   return (
-    <footer className="bg-gray-900 text-white py-12">
+    <footer className="bg-white border-t border-gray-100 py-16">
       <div className="container mx-auto px-4">
-        <div className="grid md:grid-cols-4 gap-8 mb-8">
-          <div className="col-span-1 md:col-span-2">
-             <div className="flex items-center space-x-2 text-2xl font-black tracking-tighter mb-4">
-                <img src="/logo.png" alt="Colorful Animal Studio Logo" className="h-10 w-auto object-contain" />
+        <div className="flex flex-col md:flex-row justify-between items-center gap-8">
+          
+          <div className="text-center md:text-left">
+             <div className="flex items-center justify-center md:justify-start space-x-2 text-2xl font-black tracking-tight mb-2 text-gray-800">
                 <span>Colorful <span className="text-brand-orange">Animal Studio</span></span>
             </div>
-            <p className="text-gray-400 max-w-sm">
-                Creating joy through animation and games. Based in the digital cloud, serving happy clients worldwide.
+            <p className="text-gray-400 text-sm max-w-xs mx-auto md:mx-0">
+                {t('footer.tag')}
             </p>
           </div>
           
-          <div>
-            <h4 className="font-bold text-lg mb-4">Studio</h4>
-            <ul className="space-y-2 text-gray-400">
-                <li><a href="#" className="hover:text-brand-orange">About Us</a></li>
-                <li><a href="#" className="hover:text-brand-orange">Careers</a></li>
-                <li><a href="#" className="hover:text-brand-orange">Blog</a></li>
-            </ul>
+          <div className="flex flex-wrap justify-center gap-6">
+            <a href="https://www.youtube.com/@ColorfulAnimalStudio" target="_blank" rel="noreferrer" className="flex items-center space-x-2 px-4 py-2 bg-red-50 text-red-600 rounded-full font-bold hover:bg-red-100 transition-colors">
+                <span>YouTube</span>
+            </a>
+            <a href="https://facebook.com" target="_blank" rel="noreferrer" className="flex items-center space-x-2 px-4 py-2 bg-blue-50 text-blue-600 rounded-full font-bold hover:bg-blue-100 transition-colors">
+                <span>Facebook</span>
+            </a>
+            <a href="https://tiktok.com" target="_blank" rel="noreferrer" className="flex items-center space-x-2 px-4 py-2 bg-gray-100 text-black rounded-full font-bold hover:bg-gray-200 transition-colors">
+                <span>TikTok</span>
+            </a>
+             <a href="https://linkedin.com" target="_blank" rel="noreferrer" className="flex items-center space-x-2 px-4 py-2 bg-sky-50 text-sky-700 rounded-full font-bold hover:bg-sky-100 transition-colors">
+                <span>LinkedIn</span>
+            </a>
           </div>
           
-          <div>
-            <h4 className="font-bold text-lg mb-4">Connect</h4>
-            <ul className="space-y-2 text-gray-400">
-                <li><a href="#" className="hover:text-brand-orange">Twitter / X</a></li>
-                <li><a href="#" className="hover:text-brand-orange">Instagram</a></li>
-                <li><a href="#" className="hover:text-brand-orange">YouTube</a></li>
-            </ul>
-          </div>
         </div>
         
-        <div className="border-t border-gray-800 pt-8 text-center text-gray-500 text-sm">
-            &copy; {new Date().getFullYear()} Colorful Animal Studio. All rights reserved.
+        <div className="mt-12 text-center text-gray-300 text-xs font-bold">
+            &copy; {new Date().getFullYear()} Colorful Animal Studio.
         </div>
       </div>
     </footer>

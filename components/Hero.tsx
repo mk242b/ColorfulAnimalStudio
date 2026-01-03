@@ -1,7 +1,10 @@
 import React from 'react';
 import { Button } from './Button';
+import { useLanguage } from '../contexts/LanguageContext';
 
 export const Hero: React.FC = () => {
+  const { t } = useLanguage();
+
   return (
     <section className="relative pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden bg-gradient-to-b from-blue-50 to-purple-50">
       {/* Decorative Blobs */}
@@ -11,31 +14,21 @@ export const Hero: React.FC = () => {
 
       <div className="container mx-auto px-4 relative z-10 text-center">
         <div className="inline-block mb-4 px-4 py-1 rounded-full bg-white border border-brand-orange/20 text-brand-orange font-bold text-sm shadow-sm">
-          ✨ Bringing imagination to life!
+          {t('hero.tag')}
         </div>
         <h1 className="text-5xl md:text-7xl font-black mb-6 text-gray-900 leading-tight">
-          We Create <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-orange to-brand-pink">Magic</span> for <br/>
-          Kids & Games
+          {t('hero.title.start')} <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-orange to-brand-pink">{t('hero.title.highlight')}</span>
         </h1>
         <p className="text-xl md:text-2xl text-gray-600 mb-10 max-w-2xl mx-auto leading-relaxed">
-          From YouTube animation series to custom game assets. Colorful Animal Studio creates vibrant worlds that spark joy.
+          {t('hero.subtitle')}
         </p>
         <div className="flex flex-col sm:flex-row justify-center gap-4">
           <Button size="lg" onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}>
-            Start Your Project 🚀
+            {t('hero.cta.primary')}
           </Button>
           <Button size="lg" variant="outline" onClick={() => document.getElementById('portfolio')?.scrollIntoView({ behavior: 'smooth' })}>
-            View Our Work 📺
+            {t('hero.cta.secondary')}
           </Button>
-        </div>
-
-        {/* Hero Image Placeholder */}
-        <div className="mt-16 mx-auto max-w-5xl rounded-3xl overflow-hidden shadow-2xl transform hover:-translate-y-2 transition-transform duration-500">
-           <img 
-            src="https://picsum.photos/1200/600?random=10" 
-            alt="Colorful Animation Studio Work" 
-            className="w-full h-auto object-cover"
-          />
         </div>
       </div>
     </section>

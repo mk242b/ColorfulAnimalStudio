@@ -1,38 +1,41 @@
 import React from 'react';
 import { Service } from '../types';
-
-const services: Service[] = [
-  {
-    id: '1',
-    title: 'Kids Animation',
-    description: 'We produce engaging, educational, and fun animation content tailored for YouTube Kids and broadcast.',
-    icon: '🎥',
-    color: 'bg-blue-100 text-blue-600',
-  },
-  {
-    id: '2',
-    title: 'Game Development',
-    description: 'Full-cycle game development for mobile and web. We turn your colorful ideas into playable reality.',
-    icon: '🎮',
-    color: 'bg-purple-100 text-purple-600',
-  },
-  {
-    id: '3',
-    title: 'Character Design',
-    description: 'Custom character design and rigging services. We bring mascots and heroes to life with personality.',
-    icon: '✏️',
-    color: 'bg-orange-100 text-brand-orange',
-  },
-];
+import { useLanguage } from '../contexts/LanguageContext';
 
 export const Services: React.FC = () => {
+  const { t } = useLanguage();
+
+  const services: Service[] = [
+    {
+      id: '1',
+      title: t('service.animation.title'),
+      description: t('service.animation.desc'),
+      icon: '🎥',
+      color: 'bg-blue-100 text-blue-600',
+    },
+    {
+      id: '2',
+      title: t('service.game.title'),
+      description: t('service.game.desc'),
+      icon: '🎮',
+      color: 'bg-purple-100 text-purple-600',
+    },
+    {
+      id: '3',
+      title: t('service.character.title'),
+      description: t('service.character.desc'),
+      icon: '✏️',
+      color: 'bg-orange-100 text-brand-orange',
+    },
+  ];
+
   return (
     <section id="services" className="py-20 bg-white">
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
-          <h2 className="text-4xl font-black text-gray-900 mb-4">Our Services</h2>
+          <h2 className="text-4xl font-black text-gray-900 mb-4">{t('services.title')}</h2>
           <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-            Everything you need to build a colorful digital presence for a young audience.
+            {t('services.subtitle')}
           </p>
         </div>
 

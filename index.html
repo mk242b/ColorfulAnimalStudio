@@ -5,20 +5,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Colorful Animal Studio</title>
     <link rel="icon" type="image/png" href="/logo.png" />
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;900&family=Noto+Sans+Myanmar:wght@400;500;600;700&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
       tailwind.config = {
         theme: {
           extend: {
             colors: {
-              'brand-yellow': '#FFD700',
-              'brand-orange': '#FF8C00',
-              'brand-teal': '#20B2AA',
-              'brand-purple': '#9370DB',
-              'brand-pink': '#FF69B4',
+              'brand-yellow': '#FFEAA7', /* Soft Pastel Yellow */
+              'brand-orange': '#FF7675', /* Salmon/Soft Red-Orange - Pop color */
+              'brand-teal': '#81ECEC',   /* Soft Cyan */
+              'brand-purple': '#A29BFE', /* Periwinkle */
+              'brand-pink': '#FAB1A0',   /* Pastel Pink */
+              'brand-bg': '#FFFFFF',
             },
             fontFamily: {
-              sans: ['Comic Sans MS', 'Comic Sans', 'Verdana', 'sans-serif'],
+              sans: ['Nunito', 'Noto Sans Myanmar', 'sans-serif'],
             }
           }
         }
@@ -27,21 +29,23 @@
     <style>
         html {
             scroll-behavior: smooth;
-            scroll-padding-top: 100px; /* Offsets the sticky header */
+            scroll-padding-top: 100px;
         }
-        /* Custom scrollbar for a fun feel */
+        body {
+            background-color: #FAFAFA; /* Minimalist off-white background */
+        }
         ::-webkit-scrollbar {
-            width: 12px;
+            width: 10px;
         }
         ::-webkit-scrollbar-track {
-            background: #f1f1f1;
+            background: #ffffff;
         }
         ::-webkit-scrollbar-thumb {
-            background: #FF8C00;
-            border-radius: 6px;
+            background: #dfe6e9;
+            border-radius: 5px;
         }
         ::-webkit-scrollbar-thumb:hover {
-            background: #e07b00;
+            background: #b2bec3;
         }
     </style>
   <script type="importmap">
@@ -55,7 +59,7 @@
 }
 </script>
 </head>
-  <body class="bg-gray-50 text-gray-800">
+  <body class="text-gray-700">
     <div id="root"></div>
     <script type="module" src="./index.tsx"></script>
   </body>

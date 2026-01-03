@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import { Button } from './Button';
+import { useLanguage } from '../contexts/LanguageContext';
 
 export const Contact: React.FC = () => {
+  const { t } = useLanguage();
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -18,7 +20,6 @@ export const Contact: React.FC = () => {
     setTimeout(() => {
       setStatus('success');
       setFormData({ name: '', email: '', service: 'Video Animation', message: '' });
-      // Reset success message after 5 seconds
       setTimeout(() => setStatus('idle'), 5000);
     }, 1500);
   };
@@ -31,95 +32,121 @@ export const Contact: React.FC = () => {
   };
 
   return (
-    <section id="contact" className="py-20 bg-brand-yellow/10">
-      <div className="container mx-auto px-4 text-center max-w-3xl">
-        <h2 className="text-4xl font-black text-gray-900 mb-6">Ready to Start a Project?</h2>
-        <p className="text-xl text-gray-600 mb-10">
-          Whether you need a full season of cartoons or a Unity developer for your next game, we'd love to chat!
-        </p>
-        
-        {status === 'success' ? (
-          <div className="bg-white p-12 rounded-3xl shadow-xl animate-fade-in border-4 border-green-100">
-            <div className="text-6xl mb-4">🎉</div>
-            <h3 className="text-2xl font-bold text-gray-900 mb-2">Message Sent!</h3>
-            <p className="text-gray-600">Thanks for reaching out! We'll get back to you within 24 hours.</p>
-            <button 
-              onClick={() => setStatus('idle')}
-              className="mt-6 text-brand-orange font-bold hover:underline"
-            >
-              Send another message
-            </button>
-          </div>
-        ) : (
-          <form onSubmit={handleSubmit} className="bg-white p-8 md:p-12 rounded-3xl shadow-xl text-left space-y-6">
-            <div className="grid md:grid-cols-2 gap-6">
-              <div>
-                <label htmlFor="name" className="block text-sm font-bold text-gray-700 mb-2">Your Name</label>
-                <input
-                  id="name"
-                  name="name"
-                  type="text"
-                  required
-                  value={formData.name}
-                  onChange={handleChange}
-                  className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-brand-orange focus:ring-4 focus:ring-brand-orange/10 outline-none transition-all"
-                  placeholder="John Doe"
-                />
-              </div>
-              <div>
-                <label htmlFor="email" className="block text-sm font-bold text-gray-700 mb-2">Email Address</label>
-                <input
-                  id="email"
-                  name="email"
-                  type="email"
-                  required
-                  value={formData.email}
-                  onChange={handleChange}
-                  className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-brand-orange focus:ring-4 focus:ring-brand-orange/10 outline-none transition-all"
-                  placeholder="john@example.com"
-                />
-              </div>
+    <section id="contact" className="py-24 bg-brand-yellow/20">
+      <div className="container mx-auto px-4">
+        <div className="max-w-5xl mx-auto bg-white rounded-[3rem] shadow-xl overflow-hidden flex flex-col md:flex-row">
+            
+            {/* Contact Info Sidebar */}
+            <div className="bg-brand-orange p-10 md:p-12 text-white flex flex-col justify-center md:w-1/3">
+                <h3 className="text-3xl font-black mb-6">{t('contact.title')}</h3>
+                <p className="mb-8 opacity-90 text-lg">{t('contact.subtitle')}</p>
+                
+                <div className="space-y-6">
+                    <div>
+                        <span className="block text-sm font-bold opacity-75 uppercase tracking-wider mb-1">{t('contact.email')}</span>
+                        <a href="mailto:colorfulanimalstudio@gmail.com" className="text-lg md:text-xl font-bold hover:underline break-words">colorfulanimalstudio@gmail.com</a>
+                    </div>
+                    <div>
+                        <span className="block text-sm font-bold opacity-75 uppercase tracking-wider mb-1">{t('contact.call')}</span>
+                        <a href="tel:+1234567890" className="text-xl font-bold hover:underline">+1 (555) 123-4567</a>
+                    </div>
+                    <div className="pt-6 border-t border-white/20">
+                        <span className="block text-sm font-bold opacity-75 uppercase tracking-wider mb-3">{t('contact.follow')}</span>
+                        <div className="flex gap-4 text-2xl">
+                             <a href="#" className="hover:opacity-75 transition-opacity">📺</a>
+                             <a href="#" className="hover:opacity-75 transition-opacity">📘</a>
+                             <a href="#" className="hover:opacity-75 transition-opacity">🎵</a>
+                        </div>
+                    </div>
+                </div>
             </div>
 
-            <div>
-              <label htmlFor="service" className="block text-sm font-bold text-gray-700 mb-2">Interested In</label>
-              <select
-                id="service"
-                name="service"
-                value={formData.service}
-                onChange={handleChange}
-                className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-brand-orange focus:ring-4 focus:ring-brand-orange/10 outline-none transition-all bg-white"
-              >
-                <option value="Video Animation">Video Animation 🎥</option>
-                <option value="Game Development">Game Development 🎮</option>
-                <option value="Character Design">Character Design ✏️</option>
-                <option value="Other">Other ❓</option>
-              </select>
-            </div>
+            {/* Form Area */}
+            <div className="p-8 md:p-12 md:w-2/3">
+                {status === 'success' ? (
+                <div className="h-full flex flex-col items-center justify-center text-center p-8">
+                    <div className="w-24 h-24 bg-green-100 rounded-full flex items-center justify-center text-4xl mb-6 text-green-500">
+                        ✓
+                    </div>
+                    <h3 className="text-3xl font-bold text-gray-800 mb-2">{t('contact.success.title')}</h3>
+                    <p className="text-gray-500 text-lg">{t('contact.success.desc')}</p>
+                    <button 
+                    onClick={() => setStatus('idle')}
+                    className="mt-8 text-brand-orange font-bold hover:underline"
+                    >
+                    {t('contact.success.again')}
+                    </button>
+                </div>
+                ) : (
+                <form onSubmit={handleSubmit} className="space-y-6">
+                    <h2 className="text-2xl font-bold text-gray-800 md:hidden">{t('contact.form.title')}</h2>
+                    <div className="grid md:grid-cols-2 gap-6">
+                    <div>
+                        <label htmlFor="name" className="block text-xs font-bold text-gray-500 uppercase tracking-wide mb-2">{t('contact.form.name')}</label>
+                        <input
+                        id="name"
+                        name="name"
+                        type="text"
+                        required
+                        value={formData.name}
+                        onChange={handleChange}
+                        className="w-full px-4 py-3 rounded-xl bg-gray-50 border-2 border-transparent focus:bg-white focus:border-brand-orange outline-none transition-all font-bold text-gray-700 placeholder-gray-300"
+                        />
+                    </div>
+                    <div>
+                        <label htmlFor="email" className="block text-xs font-bold text-gray-500 uppercase tracking-wide mb-2">{t('contact.form.email')}</label>
+                        <input
+                        id="email"
+                        name="email"
+                        type="email"
+                        required
+                        value={formData.email}
+                        onChange={handleChange}
+                        className="w-full px-4 py-3 rounded-xl bg-gray-50 border-2 border-transparent focus:bg-white focus:border-brand-orange outline-none transition-all font-bold text-gray-700 placeholder-gray-300"
+                        />
+                    </div>
+                    </div>
 
-            <div>
-              <label htmlFor="message" className="block text-sm font-bold text-gray-700 mb-2">Your Message</label>
-              <textarea
-                id="message"
-                name="message"
-                rows={4}
-                required
-                value={formData.message}
-                onChange={handleChange}
-                className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-brand-orange focus:ring-4 focus:ring-brand-orange/10 outline-none transition-all resize-none"
-                placeholder="Tell us a bit about your project..."
-              ></textarea>
-            </div>
+                    <div>
+                    <label htmlFor="service" className="block text-xs font-bold text-gray-500 uppercase tracking-wide mb-2">{t('contact.form.topic')}</label>
+                    <select
+                        id="service"
+                        name="service"
+                        value={formData.service}
+                        onChange={handleChange}
+                        className="w-full px-4 py-3 rounded-xl bg-gray-50 border-2 border-transparent focus:bg-white focus:border-brand-orange outline-none transition-all font-bold text-gray-700"
+                    >
+                        <option value="Video Animation">{t('topic.animation')}</option>
+                        <option value="Game Development">{t('topic.game')}</option>
+                        <option value="Character Design">{t('topic.character')}</option>
+                        <option value="Other">{t('topic.other')}</option>
+                    </select>
+                    </div>
 
-            <Button 
-              type="submit" 
-              className="w-full"
-              disabled={status === 'submitting'}
-            >
-              {status === 'submitting' ? 'Sending...' : 'Send Message 📨'}
-            </Button>
-          </form>
-        )}
+                    <div>
+                    <label htmlFor="message" className="block text-xs font-bold text-gray-500 uppercase tracking-wide mb-2">{t('contact.form.message')}</label>
+                    <textarea
+                        id="message"
+                        name="message"
+                        rows={4}
+                        required
+                        value={formData.message}
+                        onChange={handleChange}
+                        className="w-full px-4 py-3 rounded-xl bg-gray-50 border-2 border-transparent focus:bg-white focus:border-brand-orange outline-none transition-all font-bold text-gray-700 placeholder-gray-300 resize-none"
+                    ></textarea>
+                    </div>
+
+                    <Button 
+                    type="submit" 
+                    className="w-full text-lg"
+                    disabled={status === 'submitting'}
+                    >
+                    {status === 'submitting' ? t('contact.form.sending') : t('contact.form.send')}
+                    </Button>
+                </form>
+                )}
+            </div>
+        </div>
       </div>
     </section>
   );
