@@ -1,25 +1,33 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Button } from './Button';
 import { useLanguage } from '../contexts/LanguageContext';
 
 export const Hero: React.FC = () => {
   const { t, language } = useLanguage();
   const isMM = language === 'mm';
+  const [videoError, setVideoError] = useState(false);
 
   return (
     <section className="relative pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden bg-white">
       {/* Video Background */}
       <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
-        <div className="absolute inset-0 bg-white/50"></div>
-        <iframe 
-          className="absolute top-1/2 left-1/2 w-[300%] h-[300%] -translate-x-1/2 -translate-y-1/2 opacity-25 blur-xl grayscale-[20%]"
-          src="https://www.youtube.com/embed/K5sPA2YAf18?autoplay=1&mute=1&controls=0&loop=1&playlist=K5sPA2YAf18&showinfo=0&modestbranding=1&rel=0&playsinline=1&enablejsapi=1"
-          title="Background Video"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          style={{ pointerEvents: 'none' }}
-        />
-        {/* Gradient Overlay to blend with site aesthetics and ensure text readability */}
-        <div className="absolute inset-0 bg-gradient-to-b from-white/90 via-white/80 to-white/95"></div>
+        {/* Base wash to ensure it's not too dark if video has dark spots */}
+        <div className="absolute inset-0 bg-white/40"></div>
+        
+        {!videoError && (
+          <iframe 
+            // Increased opacity to 60%, reduced blur to sm, removed grayscale for "more obvious" look
+            className="absolute top-1/2 left-1/2 w-[300%] h-[300%] -translate-x-1/2 -translate-y-1/2 opacity-60 blur-sm"
+            src="https://www.youtube.com/embed/K5sPA2YAf18?autoplay=1&mute=1&controls=0&loop=1&playlist=K5sPA2YAf18&showinfo=0&modestbranding=1&rel=0&playsinline=1&enablejsapi=1"
+            title="Background Video"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            style={{ pointerEvents: 'none' }}
+            onError={() => setVideoError(true)}
+          />
+        )}
+        
+        {/* Gradient Overlay - Reduced opacity to let video show through more */}
+        <div className="absolute inset-0 bg-gradient-to-b from-white/80 via-white/60 to-white/90"></div>
       </div>
 
       {/* Decorative Blobs - Reduced opacity for better text readability */}
@@ -30,7 +38,7 @@ export const Hero: React.FC = () => {
 
       <div className="container mx-auto px-4 relative z-10 text-center">
         {/* Tag - Clean, static, readable */}
-        <div className="inline-block mb-6 px-6 py-2 rounded-full bg-blue-50 border border-brand-blue/10 text-brand-blue font-bold text-sm md:text-base cursor-default select-none shadow-sm">
+        <div className="inline-block mb-6 px-6 py-2 rounded-full bg-blue-50/90 backdrop-blur-sm border border-brand-blue/10 text-brand-blue font-bold text-sm md:text-base cursor-default select-none shadow-sm">
           {t('hero.tag')}
         </div>
         
@@ -60,8 +68,8 @@ export const Hero: React.FC = () => {
           </span>
         </h1>
         
-        {/* Subtitle - Optimized for reading */}
-        <p className={`text-gray-700 mb-12 md:mb-16 max-w-2xl mx-auto font-medium ${
+        {/* Subtitle - Optimized for reading against busier background */}
+        <p className={`text-gray-800 mb-12 md:mb-16 max-w-2xl mx-auto font-bold ${
             isMM 
               ? 'text-base md:text-xl leading-8' 
               : 'text-lg md:text-2xl leading-relaxed'
