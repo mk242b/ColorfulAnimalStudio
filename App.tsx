@@ -5,6 +5,7 @@ import { Services } from './components/Services';
 import { Portfolio } from './components/Portfolio';
 import { Contact } from './components/Contact';
 import { Footer } from './components/Footer';
+import { ChannelStatsPanel } from './components/ChannelStats';
 import { useLanguage } from './contexts/LanguageContext';
 
 const App: React.FC = () => {
@@ -16,6 +17,7 @@ const App: React.FC = () => {
       <Header />
       <main>
         <Hero />
+        <ChannelStatsPanel />
         <Services />
         <Portfolio />
         <Contact />

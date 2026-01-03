@@ -21,14 +21,8 @@ export const Footer: React.FC = () => {
             <a href="https://www.youtube.com/@ColorfulAnimalStudio" target="_blank" rel="noreferrer" className="flex items-center space-x-2 px-4 py-2 bg-red-50 text-red-600 rounded-full font-bold hover:bg-red-100 transition-colors">
                 <span>YouTube</span>
             </a>
-            <a href="https://facebook.com" target="_blank" rel="noreferrer" className="flex items-center space-x-2 px-4 py-2 bg-blue-50 text-blue-600 rounded-full font-bold hover:bg-blue-100 transition-colors">
-                <span>Facebook</span>
-            </a>
-            <a href="https://tiktok.com" target="_blank" rel="noreferrer" className="flex items-center space-x-2 px-4 py-2 bg-gray-100 text-black rounded-full font-bold hover:bg-gray-200 transition-colors">
+            <a href="https://www.tiktok.com/@colorfulanimalstudio" target="_blank" rel="noreferrer" className="flex items-center space-x-2 px-4 py-2 bg-black/5 text-black rounded-full font-bold hover:bg-black/10 transition-colors">
                 <span>TikTok</span>
-            </a>
-             <a href="https://linkedin.com" target="_blank" rel="noreferrer" className="flex items-center space-x-2 px-4 py-2 bg-sky-50 text-sky-700 rounded-full font-bold hover:bg-sky-100 transition-colors">
-                <span>LinkedIn</span>
             </a>
           </div>
           

@@ -2,7 +2,6 @@ import React from 'react';
 import { PortfolioItem } from '../types';
 import { YouTubeEmbed } from './YouTubeEmbed';
 import { useLanguage } from '../contexts/LanguageContext';
-import { ChannelStatsPanel } from './ChannelStats';
 
 // Updated with specific video IDs
 const items: PortfolioItem[] = [
@@ -49,9 +48,6 @@ export const Portfolio: React.FC = () => {
             <h2 className="text-4xl font-black text-gray-800 mb-4">{t('portfolio.title')}</h2>
             <div className="w-24 h-2 bg-brand-orange mx-auto rounded-full opacity-50 mb-6"></div>
         </div>
-
-        {/* Stats Panel */}
-        <ChannelStatsPanel />
 
         <div className="text-center mb-10">
             <a 

@@ -32,40 +32,36 @@ export const Contact: React.FC = () => {
   };
 
   return (
-    <section id="contact" className="py-24 bg-brand-yellow/20">
+    <section id="contact" className="py-12 md:py-24 bg-brand-yellow/10">
       <div className="container mx-auto px-4">
-        <div className="max-w-5xl mx-auto bg-white rounded-[3rem] shadow-xl overflow-hidden flex flex-col md:flex-row">
+        <div className="max-w-4xl mx-auto bg-white rounded-[2rem] md:rounded-[3rem] shadow-xl overflow-hidden flex flex-col md:flex-row">
             
-            {/* Contact Info Sidebar */}
-            <div className="bg-brand-orange p-10 md:p-12 text-white flex flex-col justify-center md:w-1/3">
-                <h3 className="text-3xl font-black mb-6">{t('contact.title')}</h3>
-                <p className="mb-8 opacity-90 text-lg">{t('contact.subtitle')}</p>
-                
-                <div className="space-y-6">
-                    <div>
-                        <span className="block text-sm font-bold opacity-75 uppercase tracking-wider mb-1">{t('contact.email')}</span>
-                        <a href="mailto:colorfulanimalstudio@gmail.com" className="text-lg md:text-xl font-bold hover:underline break-words">colorfulanimalstudio@gmail.com</a>
-                    </div>
-                    <div>
-                        <span className="block text-sm font-bold opacity-75 uppercase tracking-wider mb-1">{t('contact.call')}</span>
-                        <a href="tel:+1234567890" className="text-xl font-bold hover:underline">+1 (555) 123-4567</a>
-                    </div>
-                    <div className="pt-6 border-t border-white/20">
-                        <span className="block text-sm font-bold opacity-75 uppercase tracking-wider mb-3">{t('contact.follow')}</span>
-                        <div className="flex gap-4 text-2xl">
-                             <a href="#" className="hover:opacity-75 transition-opacity">📺</a>
-                             <a href="#" className="hover:opacity-75 transition-opacity">📘</a>
-                             <a href="#" className="hover:opacity-75 transition-opacity">🎵</a>
-                        </div>
+            {/* Minimalist Sidebar - Hidden on Mobile */}
+            <div className="hidden md:flex bg-brand-orange p-10 flex-col justify-center items-center text-center md:w-1/3 relative overflow-hidden">
+                <div className="absolute inset-0 opacity-10 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')]"></div>
+                <div className="relative z-10">
+                    <h3 className="text-3xl font-black text-white mb-4">{t('contact.title')}</h3>
+                    <p className="mb-8 text-white/90 font-medium">{t('contact.subtitle')}</p>
+                    
+                    <div className="bg-white/20 backdrop-blur-sm p-4 rounded-xl border border-white/30 inline-block">
+                        <span className="block text-xs font-bold text-white/80 uppercase tracking-wider mb-1">{t('contact.email')}</span>
+                        <a href="mailto:colorfulanimalstudio@gmail.com" className="text-white font-bold hover:underline break-all text-sm md:text-base">
+                            colorfulanimalstudio<br/>@gmail.com
+                        </a>
                     </div>
                 </div>
             </div>
 
             {/* Form Area */}
-            <div className="p-8 md:p-12 md:w-2/3">
+            <div className="p-6 md:p-12 md:w-2/3">
+                {/* Mobile Header - Just "Let's Chat!" */}
+                <div className="md:hidden mb-6 text-center border-b border-gray-100 pb-4">
+                     <h2 className="text-3xl font-black text-brand-orange">{t('contact.title')}</h2>
+                </div>
+
                 {status === 'success' ? (
                 <div className="h-full flex flex-col items-center justify-center text-center p-8">
-                    <div className="w-24 h-24 bg-green-100 rounded-full flex items-center justify-center text-4xl mb-6 text-green-500">
+                    <div className="w-24 h-24 bg-green-100 rounded-full flex items-center justify-center text-4xl mb-6 text-green-500 animate-bounce">
                         ✓
                     </div>
                     <h3 className="text-3xl font-bold text-gray-800 mb-2">{t('contact.success.title')}</h3>
@@ -78,9 +74,8 @@ export const Contact: React.FC = () => {
                     </button>
                 </div>
                 ) : (
-                <form onSubmit={handleSubmit} className="space-y-6">
-                    <h2 className="text-2xl font-bold text-gray-800 md:hidden">{t('contact.form.title')}</h2>
-                    <div className="grid md:grid-cols-2 gap-6">
+                <form onSubmit={handleSubmit} className="space-y-4 md:space-y-6">
+                    <div className="grid md:grid-cols-2 gap-4 md:gap-6">
                     <div>
                         <label htmlFor="name" className="block text-xs font-bold text-gray-500 uppercase tracking-wide mb-2">{t('contact.form.name')}</label>
                         <input

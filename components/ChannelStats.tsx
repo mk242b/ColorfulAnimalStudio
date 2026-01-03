@@ -23,9 +23,6 @@ export const ChannelStatsPanel: React.FC = () => {
     useEffect(() => {
       if (!end || loading) return;
       
-      // Parse the number, handling K/M suffixes roughly for the animation target if needed, 
-      // but here we expect raw numbers from the API before formatting in the UI usually.
-      // However, fetchChannelStats returns strings that might be raw numbers.
       const target = parseInt(end, 10);
       if (isNaN(target)) return;
 
@@ -49,61 +46,66 @@ export const ChannelStatsPanel: React.FC = () => {
     return count;
   };
 
-  // If stats are null (error/loading), we use "0" for the counter target
   const subCount = useCounter(stats?.subscriberCount || '0');
   const viewCount = useCounter(stats?.viewCount || '0');
   const videoCount = useCounter(stats?.videoCount || '0');
 
-  // Display logic: show formatted animated number if loaded, else formatted static number or placeholder
   const displayValue = (currentVal: number, originalStr: string | undefined) => {
       if (loading) return '...';
-      if (!stats) return '-'; // Error state
-      // If the number is huge, the counter might be expensive or jumpy, 
-      // but for this simple implementation we count up to the raw value 
-      // and then format the CURRENT count.
+      if (!stats) return '-'; 
       return formatNumber(currentVal.toString());
   };
 
   return (
-    <div className="max-w-4xl mx-auto mb-16 transform -translate-y-4 px-4 relative z-20">
-      <div className="bg-white/80 backdrop-blur-lg rounded-[2rem] shadow-xl shadow-brand-blue/5 p-8 flex flex-col md:flex-row justify-around items-center gap-8 border border-white ring-1 ring-gray-100">
-        
-        {/* Subscribers */}
-        <div className="text-center group hover:scale-105 transition-transform duration-300 w-full md:w-auto">
-           <div className="text-4xl md:text-5xl font-black text-brand-orange mb-2 font-sans drop-shadow-sm min-w-[120px]">
-             {displayValue(subCount, stats?.subscriberCount)}
-           </div>
-           <div className="text-gray-400 font-bold uppercase tracking-widest text-xs">
-             {t('stats.subscribers')}
-           </div>
+    <div className="max-w-5xl mx-auto mb-6 md:mb-20 transform -translate-y-6 px-4 relative z-20">
+      <div className="bg-white rounded-[1.5rem] md:rounded-[2.5rem] p-1 bg-gradient-to-r from-brand-orange via-brand-red to-brand-blue shadow-2xl">
+        <div className="bg-white rounded-[1.3rem] md:rounded-[2.3rem] p-2 md:p-10 flex flex-col items-center">
+            
+            <div className="mb-2 md:mb-8 flex items-center gap-2 bg-red-50 px-3 py-1 md:px-4 rounded-full border border-red-100">
+                <span className="relative flex h-2 w-2 md:h-3 md:w-3">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
+                  <span className="relative inline-flex rounded-full h-2 w-2 md:h-3 md:w-3 bg-red-500"></span>
+                </span>
+                <span className="text-red-500 font-bold text-[10px] md:text-xs tracking-wider uppercase">Live Analytics</span>
+            </div>
+
+            {/* Grid Layout: Always 3 columns (Horizontal on Mobile) */}
+            <div className="w-full grid grid-cols-3 gap-1 md:gap-8 divide-x divide-gray-100">
+                {/* Subscribers */}
+                <div className="text-center px-1">
+                    <div className="text-xl sm:text-3xl md:text-7xl font-black text-transparent bg-clip-text bg-gradient-to-br from-brand-orange to-red-500 mb-1 md:mb-2 font-sans truncate">
+                        {displayValue(subCount, stats?.subscriberCount)}
+                    </div>
+                    <div className="text-gray-500 font-bold text-[9px] sm:text-xs md:text-base uppercase tracking-widest truncate">
+                        {t('stats.subscribers')}
+                    </div>
+                </div>
+
+                {/* Views */}
+                <div className="text-center px-1">
+                    <div className="text-xl sm:text-3xl md:text-7xl font-black text-transparent bg-clip-text bg-gradient-to-br from-brand-blue to-purple-600 mb-1 md:mb-2 font-sans truncate">
+                        {displayValue(viewCount, stats?.viewCount)}
+                    </div>
+                    <div className="text-gray-500 font-bold text-[9px] sm:text-xs md:text-base uppercase tracking-widest truncate">
+                        {t('stats.views')}
+                    </div>
+                </div>
+
+                {/* Videos */}
+                <div className="text-center px-1">
+                    <div className="text-xl sm:text-3xl md:text-7xl font-black text-transparent bg-clip-text bg-gradient-to-br from-brand-green to-teal-500 mb-1 md:mb-2 font-sans truncate">
+                        {displayValue(videoCount, stats?.videoCount)}
+                    </div>
+                    <div className="text-gray-500 font-bold text-[9px] sm:text-xs md:text-base uppercase tracking-widest truncate">
+                        {t('stats.videos')}
+                    </div>
+                </div>
+            </div>
+            
+            <div className="mt-2 md:mt-8 text-center text-gray-400 text-[10px] md:text-sm font-medium">
+                Our content is growing fast! Join the adventure.
+            </div>
         </div>
-
-        {/* Divider */}
-        <div className="w-16 h-1 md:w-1 md:h-16 bg-gradient-to-b from-transparent via-gray-200 to-transparent rounded-full opacity-50"></div>
-
-        {/* Views */}
-        <div className="text-center group hover:scale-105 transition-transform duration-300 w-full md:w-auto">
-           <div className="text-4xl md:text-5xl font-black text-brand-blue mb-2 font-sans drop-shadow-sm min-w-[120px]">
-             {displayValue(viewCount, stats?.viewCount)}
-           </div>
-           <div className="text-gray-400 font-bold uppercase tracking-widest text-xs">
-             {t('stats.views')}
-           </div>
-        </div>
-
-        {/* Divider */}
-        <div className="w-16 h-1 md:w-1 md:h-16 bg-gradient-to-b from-transparent via-gray-200 to-transparent rounded-full opacity-50"></div>
-        
-        {/* Videos */}
-        <div className="text-center group hover:scale-105 transition-transform duration-300 w-full md:w-auto">
-           <div className="text-4xl md:text-5xl font-black text-brand-green mb-2 font-sans drop-shadow-sm min-w-[120px]">
-             {displayValue(videoCount, stats?.videoCount)}
-           </div>
-           <div className="text-gray-400 font-bold uppercase tracking-widest text-xs">
-             {t('stats.videos')}
-           </div>
-        </div>
-
       </div>
     </div>
   );
