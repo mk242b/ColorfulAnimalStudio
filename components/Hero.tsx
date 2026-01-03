@@ -35,7 +35,7 @@ export const Hero: React.FC = () => {
       <div className="absolute bottom-20 right-20 w-48 h-48 bg-brand-green rounded-full mix-blend-multiply filter blur-[64px] opacity-20 animate-blob animation-delay-2000"></div>
 
       <div className="container mx-auto px-4 relative z-10 text-center">
-        <div className="inline-block mb-6 px-6 py-2 rounded-full bg-white border-2 border-brand-blue/20 text-brand-blue font-bold text-sm md:text-base shadow-sm hover:shadow-md transition-shadow cursor-default animate-fade-in-up">
+        <div className="inline-block mb-6 px-6 py-2 rounded-full bg-white border-2 border-brand-blue/20 text-brand-blue font-bold text-sm md:text-base shadow-sm hover:shadow-md transition-shadow cursor-default">
           {t('hero.tag')}
         </div>
         
@@ -47,7 +47,7 @@ export const Hero: React.FC = () => {
           }`}>
           
           {/* Jumping Text Animation - Auto Play */}
-          <span className="inline-block animate-fade-in-up" style={{ animationDelay: '0.1s' }}>
+          <span className="inline-block">
             <JumpingText text={t('hero.title.start')} />
           </span> 
           
@@ -61,15 +61,15 @@ export const Hero: React.FC = () => {
           </span>
         </h1>
         
-        <p className={`text-gray-600 mb-12 max-w-3xl mx-auto animate-fade-in-up ${
+        <p className={`text-gray-600 mb-12 max-w-3xl mx-auto ${
             isMM 
               ? 'text-base md:text-xl leading-8' 
               : 'text-lg md:text-2xl leading-relaxed md:leading-normal'
-          }`} style={{ animationDelay: '0.3s' }}>
+          }`}>
           {t('hero.subtitle')}
         </p>
         
-        <div className="flex flex-col sm:flex-row justify-center gap-4 px-8 animate-fade-in-up" style={{ animationDelay: '0.5s' }}>
+        <div className="flex flex-col sm:flex-row justify-center gap-4 px-8">
           <Button size="lg" className="w-full sm:w-auto shadow-brand-orange/30 hover:shadow-brand-orange/50 hover:-translate-y-1" onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}>
             {t('hero.cta.primary')}
           </Button>
