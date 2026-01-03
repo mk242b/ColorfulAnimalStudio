@@ -11,6 +11,7 @@ export interface PortfolioItem {
   title: string;
   category: string;
   imageUrl: string;
+  videoId?: string;
 }
 
 export interface CharacterIdea {
