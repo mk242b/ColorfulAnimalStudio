@@ -5,22 +5,23 @@ import { Services } from './components/Services';
 import { Portfolio } from './components/Portfolio';
 import { Contact } from './components/Contact';
 import { Footer } from './components/Footer';
-import { LanguageProvider } from './contexts/LanguageContext';
+import { useLanguage } from './contexts/LanguageContext';
 
 const App: React.FC = () => {
+  const { language } = useLanguage();
+  const isMM = language === 'mm';
+
   return (
-    <LanguageProvider>
-      <div className="font-sans antialiased text-gray-800 selection:bg-brand-orange selection:text-white">
-        <Header />
-        <main>
-          <Hero />
-          <Services />
-          <Portfolio />
-          <Contact />
-        </main>
-        <Footer />
-      </div>
-    </LanguageProvider>
+    <div className={`font-sans antialiased text-gray-800 selection:bg-brand-orange selection:text-white ${isMM ? 'lang-mm' : ''}`}>
+      <Header />
+      <main>
+        <Hero />
+        <Services />
+        <Portfolio />
+        <Contact />
+      </main>
+      <Footer />
+    </div>
   );
 };
 

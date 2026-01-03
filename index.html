@@ -4,23 +4,43 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Colorful Animal Studio</title>
-    <link rel="icon" type="image/png" href="/logo.png" />
-    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;900&family=Noto+Sans+Myanmar:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" href="https://i.ibb.co/wFYDBgcJ/Colorful-Animal-Studio-Logo.png" />
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Noto+Sans+Myanmar:wght@400;500;600;700&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
       tailwind.config = {
         theme: {
           extend: {
             colors: {
-              'brand-yellow': '#FFEAA7', /* Soft Pastel Yellow */
-              'brand-orange': '#FF7675', /* Salmon/Soft Red-Orange - Pop color */
-              'brand-teal': '#81ECEC',   /* Soft Cyan */
-              'brand-purple': '#A29BFE', /* Periwinkle */
-              'brand-pink': '#FAB1A0',   /* Pastel Pink */
+              'brand-yellow': '#FDCB6E', /* Giraffe Yellow */
+              'brand-orange': '#FA8231', /* Lion Orange */
+              'brand-blue': '#0984E3',   /* Elephant/Text Blue */
+              'brand-lightblue': '#74B9FF', /* Elephant Light */
+              'brand-green': '#00B894',  /* Text Green */
+              'brand-red': '#FF7675',    /* Fox/Text Red-Pink */
+              'brand-teal': '#81ECEC',   /* Accent */
+              'brand-purple': '#A29BFE', /* Accent */
+              'brand-dark': '#2D3436',   /* Panda Black */
               'brand-bg': '#FFFFFF',
             },
             fontFamily: {
               sans: ['Nunito', 'Noto Sans Myanmar', 'sans-serif'],
+            },
+            animation: {
+              'blob': 'blob 7s infinite',
+              'fade-in-up': 'fadeInUp 0.5s ease-out forwards',
+            },
+            keyframes: {
+              blob: {
+                '0%': { transform: 'translate(0px, 0px) scale(1)' },
+                '33%': { transform: 'translate(30px, -50px) scale(1.1)' },
+                '66%': { transform: 'translate(-20px, 20px) scale(0.9)' },
+                '100%': { transform: 'translate(0px, 0px) scale(1)' },
+              },
+              fadeInUp: {
+                '0%': { opacity: '0', transform: 'translateY(20px)' },
+                '100%': { opacity: '1', transform: 'translateY(0)' },
+              }
             }
           }
         }
@@ -32,8 +52,16 @@
             scroll-padding-top: 100px;
         }
         body {
-            background-color: #FAFAFA; /* Minimalist off-white background */
+            background-color: #FAFAFA;
         }
+        /* Myanmar Font Specific Tweaks */
+        .lang-mm {
+            line-height: 2 !important; /* Extra spacing for Myanmar stacked characters */
+        }
+        .lang-mm h1, .lang-mm h2, .lang-mm h3 {
+            line-height: 1.6 !important;
+        }
+        
         ::-webkit-scrollbar {
             width: 10px;
         }
