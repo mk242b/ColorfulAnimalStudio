@@ -49,11 +49,19 @@ const items: PortfolioItem[] = [
 
 export const Portfolio: React.FC = () => {
   const [playingVideo, setPlayingVideo] = useState<string | null>(null);
+  const [activeCategory, setActiveCategory] = useState<string>('All');
+
+  // Extract unique categories
+  const categories = ['All', ...Array.from(new Set(items.map(item => item.category)))];
+
+  const filteredItems = activeCategory === 'All' 
+    ? items 
+    : items.filter(item => item.category === activeCategory);
 
   return (
     <section id="portfolio" className="py-20 bg-gray-50">
       <div className="container mx-auto px-4">
-        <div className="flex flex-col md:flex-row justify-between items-end mb-12">
+        <div className="flex flex-col md:flex-row justify-between items-end mb-8">
           <div>
             <h2 className="text-4xl font-black text-gray-900 mb-2">Latest Videos</h2>
             <p className="text-lg text-gray-600">Fresh from our studio to your screen.</p>
@@ -69,11 +77,28 @@ export const Portfolio: React.FC = () => {
           </a>
         </div>
 
+        {/* Category Filter */}
+        <div className="flex flex-wrap gap-2 mb-10">
+          {categories.map((cat) => (
+            <button
+              key={cat}
+              onClick={() => setActiveCategory(cat)}
+              className={`px-4 py-2 rounded-full text-sm font-bold transition-all duration-300 ${
+                activeCategory === cat 
+                  ? 'bg-brand-orange text-white shadow-md transform scale-105' 
+                  : 'bg-white text-gray-600 hover:bg-gray-100 border border-gray-200'
+              }`}
+            >
+              {cat}
+            </button>
+          ))}
+        </div>
+
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {items.map((item) => (
+          {filteredItems.map((item) => (
             <div 
               key={item.id} 
-              className="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1 group"
+              className="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1 group animate-fade-in-up"
             >
               <div className="relative aspect-video w-full bg-gray-900">
                 {playingVideo === item.id && item.videoId ? (
@@ -91,6 +116,7 @@ export const Portfolio: React.FC = () => {
                   <button 
                     onClick={() => setPlayingVideo(item.id)}
                     className="w-full h-full relative cursor-pointer group"
+                    aria-label={`Play ${item.title}`}
                   >
                     <img 
                       src={item.imageUrl} 
@@ -120,6 +146,12 @@ export const Portfolio: React.FC = () => {
           ))}
         </div>
         
+        {filteredItems.length === 0 && (
+            <div className="text-center py-12 text-gray-400">
+                <p>No projects found in this category.</p>
+            </div>
+        )}
+
         <div className="mt-10 text-center md:hidden">
             <a 
                 href="https://www.youtube.com/@ColorfulAnimalStudio"

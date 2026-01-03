@@ -7,7 +7,7 @@ export const Footer: React.FC = () => {
         <div className="grid md:grid-cols-4 gap-8 mb-8">
           <div className="col-span-1 md:col-span-2">
              <div className="flex items-center space-x-2 text-2xl font-black tracking-tighter mb-4">
-                <img src="/logo.png" alt="Colorful Animal Studio Logo" className="h-10 w-auto object-contain" />
+                <img src="" alt="Colorful Animal Studio Logo" className="h-10 w-auto object-contain" />
                 <span>Colorful <span className="text-brand-orange">Animal Studio</span></span>
             </div>
             <p className="text-gray-400 max-w-sm">
