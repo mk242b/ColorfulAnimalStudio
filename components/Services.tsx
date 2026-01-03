@@ -1,6 +1,7 @@
 import React from 'react';
 import { Service } from '../types';
 import { useLanguage } from '../contexts/LanguageContext';
+import { RevealOnScroll } from './RevealOnScroll';
 
 export const Services: React.FC = () => {
   const { t } = useLanguage();
@@ -32,27 +33,30 @@ export const Services: React.FC = () => {
   return (
     <section id="services" className="py-20 bg-white">
       <div className="container mx-auto px-4">
-        <div className="text-center mb-16">
-          <h2 className="text-4xl font-black text-gray-900 mb-4">{t('services.title')}</h2>
-          <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-            {t('services.subtitle')}
-          </p>
-        </div>
+        <RevealOnScroll>
+          <div className="text-center mb-16">
+            <h2 className="text-4xl font-black text-gray-900 mb-4">{t('services.title')}</h2>
+            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+              {t('services.subtitle')}
+            </p>
+          </div>
+        </RevealOnScroll>
 
         <div className="grid md:grid-cols-3 gap-8">
-          {services.map((service) => (
-            <div 
-              key={service.id} 
-              className="p-8 rounded-3xl border border-gray-100 shadow-xl hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 bg-white"
-            >
-              <div className={`w-16 h-16 rounded-2xl flex items-center justify-center text-4xl mb-6 ${service.color}`}>
-                {service.icon}
+          {services.map((service, index) => (
+            <RevealOnScroll key={service.id} delay={index * 150} className="h-full">
+              <div 
+                className="p-8 rounded-3xl border border-gray-100 shadow-xl hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 bg-white h-full flex flex-col"
+              >
+                <div className={`w-16 h-16 rounded-2xl flex items-center justify-center text-4xl mb-6 ${service.color}`}>
+                  {service.icon}
+                </div>
+                <h3 className="text-2xl font-bold mb-3 text-gray-800">{service.title}</h3>
+                <p className="text-gray-600 leading-relaxed flex-grow">
+                  {service.description}
+                </p>
               </div>
-              <h3 className="text-2xl font-bold mb-3 text-gray-800">{service.title}</h3>
-              <p className="text-gray-600 leading-relaxed">
-                {service.description}
-              </p>
-            </div>
+            </RevealOnScroll>
           ))}
         </div>
       </div>
